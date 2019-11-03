@@ -129,13 +129,13 @@ public class CourseService {
         // 2 find course from course table
 
 
-        UserCourse t1 =  UserCourse.builder()
-            .course(c1)
-            .user(curUser)
-            .build();
+//        UserCourse t1 =  UserCourse.builder()
+//            .course(c1)
+//            .user(curUser)
+//            .build();
 
         try {
-            UserCourseRepository.saveAndFlush(t1);
+//            UserCourseRepository.saveAndFlush(t1);
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }

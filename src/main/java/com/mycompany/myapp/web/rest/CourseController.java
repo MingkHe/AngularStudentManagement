@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Course;
+import com.mycompany.myapp.domain.UserCourse;
 import com.mycompany.myapp.domain.dto.CourseDto;
 import com.mycompany.myapp.domain.dto.CourseWithTNDto;
 import com.mycompany.myapp.service.CourseService;
