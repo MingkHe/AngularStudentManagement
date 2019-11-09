@@ -38,6 +38,13 @@ public class CourseController {
         return new ResponseEntity<>(allCourses, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/api/course/findAllRegCoursesDto", produces = "application/json")
+    public HttpEntity<List<CourseDto>> findAllRegCoursesDto(){
+        List<CourseDto> allCourses = courseService.findAllRegisteredCourse();
+
+        return new ResponseEntity<>(allCourses, HttpStatus.OK);
+    }
+
     @GetMapping(path = "/api/course/findAllCoursesWithTNDto", produces = "application/json")
     public HttpEntity<List<CourseWithTNDto>> findAllCoursesWithTNDto(){
         List<CourseWithTNDto> allCourses = courseService.findAllCoursesDtoWithTeacherNameFromDB();
@@ -45,8 +52,8 @@ public class CourseController {
         return new ResponseEntity<>(allCourses, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/api/course/registerCourse/{courseName}", produces = "application/json")
-    public HttpStatus registerCourse(@PathVariable String courseName) {
+    @PostMapping(path = "/api/course/registerCourse", produces = "application/json")
+    public HttpStatus registerCourse(@RequestBody @NotNull String courseName) {
         try {
             courseService.registerCourse(courseName);
             return HttpStatus.OK;
@@ -85,7 +92,7 @@ public class CourseController {
         }
     }
 
-    @DeleteMapping(path = "/api/course/deleteCourse/{courseName}", produces = "application/js")
+    @DeleteMapping(path = "/api/course/deleteCourse/{courseName}", produces = "application/json") //use "application/js" before
     public HttpStatus deleteCourse(@NotNull @PathVariable("courseName") String courseName) {
         try {
             courseService.deleteCourse(courseName);
@@ -95,8 +102,18 @@ public class CourseController {
         }
     }
 
-    @PostMapping(path = "/api/course/addCourseToStudent/{courseName}", produces = "application/js")
-    public HttpStatus addCourseToStudent(@NotNull @PathVariable("courseName") UserCourse userCourse) {
+    @DeleteMapping(path = "/api/course/dropCourse/{courseName}", produces = "application/json") //use "application/js" before
+    public HttpStatus dropCourse(@NotNull @PathVariable("courseName") String courseName) {
+        try {
+            courseService.dropCourse(courseName);
+            return HttpStatus.OK;
+        } catch (Exception e) {
+            return HttpStatus.BAD_REQUEST;
+        }
+    }
+
+    @PostMapping(path = "/api/course/addCourseToStudent/{courseName}", produces = "application/json") //use "application/js" before
+    public HttpStatus addCourseToStudent(@NotNull @PathVariable("courseName") String userCourse) {
         try {
             courseService.addCourseToStudent(userCourse);
             return HttpStatus.OK;
